@@ -4,19 +4,38 @@ function prepararBaseDatos() {
   const participantes = obtenerOCrearHoja_(
     ss,
     HOJAS.PARTICIPANTES,
-    ['id_participante', 'nombre', 'correo', 'activo']
+    [
+      'id_participante',
+      'nombre',
+      'correo',
+      'activo'
+    ]
   );
 
   const sesiones = obtenerOCrearHoja_(
     ss,
     HOJAS.SESIONES,
-    ['id_sesion', 'numero', 'fecha', 'tema', 'estado']
+    [
+      'id_sesion',
+      'numero',
+      'fecha',
+      'tema',
+      'estado'
+    ]
   );
 
   const asistencias = obtenerOCrearHoja_(
     ss,
     HOJAS.ASISTENCIAS,
-    ['id_sesion', 'id_participante', 'estado', 'hora_registro']
+    [
+      'id_sesion',
+      'id_participante',
+      'estado',
+      'hora_registro',
+      'minutos_retardo',
+      'justificado',
+      'observacion'
+    ]
   );
 
   // ==============================
@@ -24,12 +43,11 @@ function prepararBaseDatos() {
   // ==============================
 
   if (participantes.getLastRow() === 1) {
-
     const datosParticipantes = Array.from(
       { length: 30 },
       (_, i) => {
-
-        const numero = String(i + 1).padStart(2, '0');
+        const numero =
+          String(i + 1).padStart(2, '0');
 
         return [
           `P${numero}`,
@@ -55,7 +73,6 @@ function prepararBaseDatos() {
   // ==============================
 
   if (sesiones.getLastRow() === 1) {
-
     const inicio = new Date();
 
     inicio.setHours(0, 0, 0, 0);
@@ -63,10 +80,11 @@ function prepararBaseDatos() {
     const datosSesiones = Array.from(
       { length: 10 },
       (_, i) => {
+        const numero =
+          String(i + 1).padStart(2, '0');
 
-        const numero = String(i + 1).padStart(2, '0');
-
-        const fecha = new Date(inicio);
+        const fecha =
+          new Date(inicio);
 
         fecha.setDate(
           inicio.getDate() + (i * 7)
@@ -113,31 +131,38 @@ function prepararBaseDatos() {
 }
 
 
-function obtenerOCrearHoja_(ss, nombre, encabezados) {
-
-  let hoja = ss.getSheetByName(nombre);
+function obtenerOCrearHoja_(
+  ss,
+  nombre,
+  encabezados
+) {
+  let hoja =
+    ss.getSheetByName(nombre);
 
   if (!hoja) {
-    hoja = ss.insertSheet(nombre);
+    hoja =
+      ss.insertSheet(nombre);
   }
 
-  if (hoja.getLastRow() === 0) {
-
-    hoja
-      .getRange(
-        1,
-        1,
-        1,
-        encabezados.length
-      )
-      .setValues([encabezados]);
-  }
+  // Siempre aseguramos que existan
+  // los encabezados actualizados.
+  hoja
+    .getRange(
+      1,
+      1,
+      1,
+      encabezados.length
+    )
+    .setValues([encabezados]);
 
   return hoja;
 }
 
 
 function formatearHoja_(hoja) {
+  if (!hoja) {
+    return;
+  }
 
   const ultimaColumna =
     hoja.getLastColumn();
@@ -156,7 +181,9 @@ function formatearHoja_(hoja) {
       ultimaColumna
     )
     .setFontWeight('bold')
-    .setHorizontalAlignment('center');
+    .setHorizontalAlignment('center')
+    .setBackground('#1e293b')
+    .setFontColor('#ffffff');
 
   hoja.autoResizeColumns(
     1,

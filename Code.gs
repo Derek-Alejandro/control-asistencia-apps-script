@@ -4,6 +4,6 @@ function doGet() {
     .setTitle('Control de asistencia')
     .addMetaTag(
       'viewport',
-      'width=device-width, initial-scale=1'
+      'width=device-width, initial-scale=1, maximum-scale=1'
     );
 }

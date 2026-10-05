@@ -8,64 +8,224 @@
 
   <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Control de asistencia
+  </title>
+
   <style>
 
-    * { box-sizing: border-box; }
+    :root {
+
+      --fondo: #f1f5f9;
+
+      --panel: #ffffff;
+
+      --primario: #2563eb;
+
+      --primario-hover: #1d4ed8;
+
+      --oscuro: #0f172a;
+
+      --texto: #1e293b;
+
+      --texto-secundario: #64748b;
+
+      --borde: #e2e8f0;
+
+      --verde: #16a34a;
+
+      --verde-fondo: #dcfce7;
+
+      --rojo: #dc2626;
+
+      --rojo-fondo: #fee2e2;
+
+      --amarillo: #d97706;
+
+      --amarillo-fondo: #fef3c7;
+
+      --azul-fondo: #dbeafe;
+
+      --radio: 18px;
+
+      --sombra:
+        0 8px 30px
+        rgba(15, 23, 42, .08);
+
+    }
+
+
+    * {
+
+      box-sizing: border-box;
+
+    }
 
 
     body {
 
       margin: 0;
 
-      font-family: Arial, sans-serif;
+      min-height: 100vh;
 
-      background: #f3f4f6;
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
-      color: #111827;
+      background: var(--fondo);
+
+      color: var(--texto);
 
     }
 
 
+    button,
+    select,
+    input,
+    textarea {
+
+      font: inherit;
+
+    }
+
+
+    button {
+
+      cursor: pointer;
+
+    }
+
+
+    /* ============================
+       HEADER
+       ============================ */
+
+
+    .header {
+
+      background:
+        linear-gradient(
+          135deg,
+          #0f172a,
+          #1e3a8a,
+          #2563eb
+        );
+
+      color: white;
+
+      padding:
+        26px 18px
+        38px;
+
+    }
+
+
+    .header-inner {
+
+      max-width: 1200px;
+
+      margin: auto;
+
+    }
+
+
+    .header h1 {
+
+      margin: 0;
+
+      font-size:
+        clamp(
+          1.6rem,
+          5vw,
+          2.4rem
+        );
+
+    }
+
+
+    .header p {
+
+      margin:
+        8px 0 0;
+
+      opacity: .85;
+
+    }
+
+
+    /* ============================
+       CONTENEDOR
+       ============================ */
+
+
     .contenedor {
 
-      max-width: 760px;
+      width:
+        min(
+          1200px,
+          calc(100% - 24px)
+        );
 
-      margin: 0 auto;
-
-      padding: 16px;
+      margin:
+        -22px auto
+        40px;
 
     }
 
 
     .panel {
 
-      background: white;
+      background:
+        var(--panel);
 
-      border-radius: 14px;
+      border-radius:
+        var(--radio);
 
-      padding: 18px;
+      box-shadow:
+        var(--sombra);
+
+      border:
+        1px solid
+        rgba(
+          226,
+          232,
+          240,
+          .8
+        );
+
+      padding: 20px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    /* ============================
+       SELECTOR
+       ============================ */
+
+
+    .titulo-seccion {
+
+      margin:
+        0 0 14px;
+
+      font-size: 1.1rem;
+
+    }
+
+
+    .grupo-campo {
 
       margin-bottom: 14px;
-
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
-
-    }
-
-
-    h1 {
-
-      margin: 0 0 6px;
-
-      font-size: 1.45rem;
-
-    }
-
-
-    .subtitulo {
-
-      margin: 0;
-
-      color: #6b7280;
 
     }
 
@@ -74,591 +234,2767 @@
 
       display: block;
 
-      margin-bottom: 6px;
+      font-weight: 650;
 
-      font-weight: 700;
+      margin-bottom: 7px;
 
     }
 
 
-    select, button {
+    select,
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    textarea {
 
       width: 100%;
 
-      min-height: 48px;
+      border:
+        1px solid
+        var(--borde);
 
-      border-radius: 10px;
+      border-radius: 12px;
 
-      font-size: 1rem;
-
-    }
-
-
-    select {
-
-      border: 1px solid #d1d5db;
-
-      padding: 10px;
+      padding:
+        12px 13px;
 
       background: white;
 
-    }
+      color: var(--texto);
 
+      min-height: 46px;
 
-    button {
+      outline: none;
 
-      border: 0;
-
-      padding: 12px 14px;
-
-      font-weight: 700;
-
-      cursor: pointer;
+      transition: .2s;
 
     }
 
 
-    .btn-secundario {
+    select:focus,
+    input:focus,
+    textarea:focus {
 
-      background: #e5e7eb;
+      border-color:
+        var(--primario);
 
-      color: #111827;
+      box-shadow:
+        0 0 0 3px
+        rgba(
+          37,
+          99,
+          235,
+          .12
+        );
 
     }
 
 
-    .btn-principal {
+    /* ============================
+       ESTADO SESIÓN
+       ============================ */
 
-      background: #111827;
 
-      color: white;
+    .estado-sesion {
 
-      margin-top: 12px;
+      display:
+        inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      border-radius:
+        999px;
+
+      padding:
+        6px 11px;
+
+      font-size: .82rem;
+
+      font-weight: 750;
+
+      margin-top: 8px;
+
+      background:
+        var(--amarillo-fondo);
+
+      color:
+        var(--amarillo);
 
     }
+
+
+    .estado-sesion.registrada {
+
+      color:
+        var(--verde);
+
+      background:
+        var(--verde-fondo);
+
+    }
+
+
+    /* ============================
+       ESTADÍSTICAS
+       ============================ */
+
+
+    .estadisticas {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 12px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .estadistica {
+
+      background: white;
+
+      padding: 16px;
+
+      border-radius:
+        16px;
+
+      box-shadow:
+        var(--sombra);
+
+      border:
+        1px solid
+        var(--borde);
+
+    }
+
+
+    .estadistica small {
+
+      color:
+        var(--texto-secundario);
+
+      display: block;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .estadistica strong {
+
+      display: block;
+
+      font-size: 1.55rem;
+
+    }
+
+
+    .valor-verde {
+
+      color:
+        var(--verde);
+
+    }
+
+
+    .valor-rojo {
+
+      color:
+        var(--rojo);
+
+    }
+
+
+    .valor-amarillo {
+
+      color:
+        var(--amarillo);
+
+    }
+
+
+    .valor-azul {
+
+      color:
+        var(--primario);
+
+    }
+
+
+    /* ============================
+       BARRA DE PROGRESO
+       ============================ */
+
+
+    .barra {
+
+      height: 9px;
+
+      border-radius:
+        999px;
+
+      background:
+        #e2e8f0;
+
+      overflow: hidden;
+
+      margin-top: 8px;
+
+    }
+
+
+    .barra-progreso {
+
+      height: 100%;
+
+      width: 0;
+
+      background:
+        linear-gradient(
+          90deg,
+          #2563eb,
+          #22c55e
+        );
+
+      transition:
+        width .3s ease;
+
+    }
+
+
+    /* ============================
+       ACCIONES
+       ============================ */
 
 
     .acciones {
 
       display: grid;
 
-      grid-template-columns: 1fr 1fr;
-
       gap: 10px;
 
-      margin-top: 12px;
+      grid-template-columns:
+        1fr;
+
+      margin-top: 14px;
 
     }
 
 
-    .resumen {
+    .btn {
 
-      display: flex;
+      min-height: 48px;
 
-      justify-content: space-between;
+      border: none;
 
-      gap: 10px;
+      border-radius: 12px;
 
-      align-items: center;
-
-      margin-top: 12px;
+      padding:
+        11px 14px;
 
       font-weight: 700;
+
+      transition:
+        transform .15s,
+        opacity .15s;
+
+    }
+
+
+    .btn:hover {
+
+      transform:
+        translateY(-1px);
+
+    }
+
+
+    .btn:disabled {
+
+      cursor:
+        not-allowed;
+
+      opacity: .5;
+
+      transform: none;
+
+    }
+
+
+    .btn-principal {
+
+      color: white;
+
+      background:
+        var(--primario);
+
+    }
+
+
+    .btn-principal:hover {
+
+      background:
+        var(--primario-hover);
+
+    }
+
+
+    .btn-verde {
+
+      background:
+        var(--verde-fondo);
+
+      color:
+        var(--verde);
+
+    }
+
+
+    .btn-rojo {
+
+      background:
+        var(--rojo-fondo);
+
+      color:
+        var(--rojo);
+
+    }
+
+
+    /* ============================
+       BUSCADOR
+       ============================ */
+
+
+    .buscador {
+
+      position: relative;
+
+    }
+
+
+    .buscador input {
+
+      padding-left: 42px;
+
+    }
+
+
+    .buscador-icono {
+
+      position: absolute;
+
+      left: 14px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    /* ============================
+       PARTICIPANTES
+       ============================ */
+
+
+    .lista-participantes {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr;
+
+      gap: 14px;
+
+      margin-top: 16px;
 
     }
 
 
     .participante {
 
-      display: grid;
+      border:
+        1px solid
+        var(--borde);
 
-      grid-template-columns: 1fr auto;
+      background: white;
 
-      gap: 12px;
+      border-radius: 16px;
 
-      align-items: center;
+      overflow: hidden;
 
-      padding: 14px 0;
-
-      border-bottom: 1px solid #e5e7eb;
+      transition:
+        box-shadow .2s,
+        border-color .2s;
 
     }
 
 
-    .participante:last-child {
+    .participante:hover {
 
-      border-bottom: 0;
+      box-shadow:
+        0 7px 24px
+        rgba(
+          15,
+          23,
+          42,
+          .08
+        );
+
+    }
+
+
+    .participante.presente {
+
+      border-left:
+        5px solid
+        var(--verde);
+
+    }
+
+
+    .participante.ausente {
+
+      border-left:
+        5px solid
+        var(--rojo);
+
+    }
+
+
+    .participante.retardo {
+
+      border-left:
+        5px solid
+        var(--amarillo);
+
+    }
+
+
+    .participante-header {
+
+      padding:
+        16px;
+
+      display: flex;
+
+      gap: 12px;
+
+      align-items:
+        flex-start;
+
+    }
+
+
+    .avatar {
+
+      width: 44px;
+
+      height: 44px;
+
+      min-width: 44px;
+
+      border-radius: 50%;
+
+      background:
+        var(--azul-fondo);
+
+      color:
+        var(--primario);
+
+      display: grid;
+
+      place-items: center;
+
+      font-weight: 800;
+
+    }
+
+
+    .datos-participante {
+
+      flex: 1;
+
+      min-width: 0;
 
     }
 
 
     .nombre {
 
-      font-weight: 700;
+      font-weight: 750;
+
+      overflow-wrap:
+        anywhere;
 
     }
 
 
     .correo {
 
-      color: #6b7280;
+      font-size: .86rem;
 
-      font-size: .9rem;
+      color:
+        var(--texto-secundario);
 
-      overflow-wrap: anywhere;
+      overflow-wrap:
+        anywhere;
 
-    }
-
-
-    .switch {
-
-      width: 26px;
-
-      height: 26px;
+      margin-top: 3px;
 
     }
 
 
-    .mensaje {
+    .id-participante {
 
-      margin-top: 12px;
+      font-size: .75rem;
 
-      padding: 10px;
+      color:
+        var(--primario);
 
-      border-radius: 8px;
+      font-weight: 800;
+
+      margin-top: 5px;
+
+    }
+
+
+    .participante-body {
+
+      border-top:
+        1px solid
+        var(--borde);
+
+      padding: 16px;
+
+      background:
+        #f8fafc;
+
+    }
+
+
+    .campos-participante {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr;
+
+      gap: 12px;
+
+    }
+
+
+    .campo-retardo {
 
       display: none;
 
     }
 
 
-    .ok {
+    .campo-retardo.visible {
 
       display: block;
-
-      background: #dcfce7;
-
-      color: #166534;
 
     }
 
 
-    .error {
+    .fila-justificado {
 
-      display: block;
+      display: flex;
 
-      background: #fee2e2;
+      align-items: center;
 
-      color: #991b1b;
+      gap: 9px;
+
+      background: white;
+
+      padding:
+        11px 12px;
+
+      border:
+        1px solid
+        var(--borde);
+
+      border-radius: 10px;
 
     }
 
 
-    .cargando {
+    .fila-justificado input {
+
+      width: 20px;
+
+      height: 20px;
+
+    }
+
+
+    .fila-justificado label {
+
+      margin: 0;
+
+      cursor: pointer;
+
+      font-weight: 600;
+
+    }
+
+
+    textarea {
+
+      resize: vertical;
+
+      min-height: 72px;
+
+    }
+
+
+    /* ============================
+       GUARDAR
+       ============================ */
+
+
+    .zona-guardar {
+
+      position: sticky;
+
+      bottom: 8px;
+
+      z-index: 20;
+
+      padding-top: 8px;
+
+    }
+
+
+    .guardar {
+
+      width: 100%;
+
+      min-height: 54px;
+
+      font-size: 1rem;
+
+      box-shadow:
+        0 7px 25px
+        rgba(
+          37,
+          99,
+          235,
+          .25
+        );
+
+    }
+
+
+    /* ============================
+       CARGA
+       ============================ */
+
+
+    .cargando-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(
+          15,
+          23,
+          42,
+          .38
+        );
+
+      backdrop-filter:
+        blur(3px);
 
       display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 999;
+
+    }
+
+
+    .cargando-overlay.visible {
+
+      display: flex;
+
+    }
+
+
+    .cargando-box {
+
+      background: white;
+
+      padding:
+        22px 28px;
+
+      border-radius: 16px;
+
+      box-shadow:
+        var(--sombra);
 
       text-align: center;
 
-      padding: 12px;
+    }
 
-      color: #4b5563;
+
+    .spinner {
+
+      width: 36px;
+
+      height: 36px;
+
+      margin:
+        0 auto 12px;
+
+      border-radius: 50%;
+
+      border:
+        4px solid
+        #e2e8f0;
+
+      border-top-color:
+        var(--primario);
+
+      animation:
+        girar .7s linear infinite;
 
     }
 
 
-    @media (max-width: 520px) {
+    @keyframes girar {
 
-      .contenedor { padding: 10px; }
+      to {
 
-      .acciones { grid-template-columns: 1fr; }
+        transform:
+          rotate(360deg);
 
-      .panel { padding: 14px; }
+      }
 
     }
+
+
+    /* ============================
+       TOAST / ALERTAS
+       ============================ */
+
+
+    .toast-container {
+
+      position: fixed;
+
+      top: 16px;
+
+      right: 16px;
+
+      left: 16px;
+
+      z-index: 2000;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: flex-end;
+
+      gap: 10px;
+
+      pointer-events: none;
+
+    }
+
+
+    .toast {
+
+      width:
+        min(
+          420px,
+          100%
+        );
+
+      background: white;
+
+      border-radius: 14px;
+
+      padding:
+        14px 16px;
+
+      box-shadow:
+        0 12px 35px
+        rgba(
+          15,
+          23,
+          42,
+          .22
+        );
+
+      display: flex;
+
+      gap: 11px;
+
+      align-items:
+        flex-start;
+
+      border-left:
+        5px solid
+        var(--primario);
+
+      animation:
+        toastEntrada
+        .25s ease;
+
+      pointer-events: auto;
+
+    }
+
+
+    .toast.exito {
+
+      border-left-color:
+        var(--verde);
+
+    }
+
+
+    .toast.error {
+
+      border-left-color:
+        var(--rojo);
+
+    }
+
+
+    .toast.aviso {
+
+      border-left-color:
+        var(--amarillo);
+
+    }
+
+
+    .toast-icono {
+
+      font-size: 1.2rem;
+
+    }
+
+
+    .toast-texto {
+
+      flex: 1;
+
+    }
+
+
+    .toast-titulo {
+
+      font-weight: 800;
+
+      margin-bottom: 3px;
+
+    }
+
+
+    .toast-mensaje {
+
+      font-size: .9rem;
+
+      color:
+        var(--texto-secundario);
+
+    }
+
+
+    @keyframes toastEntrada {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(-8px);
+
+      }
+
+    }
+
+
+    /* ============================
+       MODAL
+       ============================ */
+
+
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(
+          15,
+          23,
+          42,
+          .55
+        );
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 1500;
+
+      padding: 18px;
+
+    }
+
+
+    .modal.visible {
+
+      display: flex;
+
+    }
+
+
+    .modal-contenido {
+
+      width:
+        min(
+          460px,
+          100%
+        );
+
+      background: white;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      box-shadow:
+        0 20px 50px
+        rgba(
+          15,
+          23,
+          42,
+          .25
+        );
+
+    }
+
+
+    .modal-contenido h2 {
+
+      margin:
+        0 0 10px;
+
+    }
+
+
+    .modal-resumen {
+
+      background:
+        #f8fafc;
+
+      border-radius: 12px;
+
+      padding: 14px;
+
+      margin:
+        15px 0;
+
+      line-height: 1.8;
+
+    }
+
+
+    .modal-acciones {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 10px;
+
+    }
+
+
+    /* ============================
+       FOOTER
+       ============================ */
+
+
+    footer {
+
+      text-align: center;
+
+      color:
+        var(--texto-secundario);
+
+      font-size: .82rem;
+
+      padding:
+        12px 20px
+        30px;
+
+    }
+
+
+    /* ============================
+       TABLET
+       ============================ */
+
+
+    @media (
+      min-width: 600px
+    ) {
+
+      .acciones {
+
+        grid-template-columns:
+          1fr 1fr;
+
+      }
+
+
+      .estadisticas {
+
+        grid-template-columns:
+          repeat(
+            4,
+            1fr
+          );
+
+      }
+
+
+      .campos-participante {
+
+        grid-template-columns:
+          1fr 1fr;
+
+      }
+
+
+      .campo-observacion {
+
+        grid-column:
+          1 / -1;
+
+      }
+
+    }
+
+
+    /* ============================
+       PC
+       ============================ */
+
+
+    @media (
+      min-width: 900px
+    ) {
+
+      .contenedor {
+
+        margin-top: -26px;
+
+      }
+
+
+      .lista-participantes {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(
+              0,
+              1fr
+            )
+          );
+
+      }
+
+
+      .panel {
+
+        padding: 24px;
+
+      }
+
+
+      .header {
+
+        padding-top: 36px;
+
+        padding-bottom: 50px;
+
+      }
+
+    }
+
 
   </style>
 
 </head>
 
+
 <body>
+
+
+  <!-- ==============================
+       HEADER
+       ============================== -->
+
+
+  <header class="header">
+
+    <div class="header-inner">
+
+      <h1>
+        Control de Asistencia
+      </h1>
+
+      <p>
+        Registro y seguimiento de participantes
+      </p>
+
+    </div>
+
+  </header>
+
+
+  <!-- ==============================
+       CONTENIDO
+       ============================== -->
+
 
   <main class="contenedor">
 
-    <section class="panel">
 
-      <h1>Control de asistencia</h1>
-
-      <p class="subtitulo">30 participantes · 10 sesiones</p>
-
-    </section>
+    <!-- SESIÓN -->
 
 
     <section class="panel">
 
-      <label for="sesion">Sesión</label>
+      <h2 class="titulo-seccion">
+        Sesión
+      </h2>
 
-      <select id="sesion">
+      <div class="grupo-campo">
 
-        <option value="">Selecciona una sesión</option>
+        <label for="sesion">
+          Selecciona una sesión
+        </label>
 
-      </select>
+        <select id="sesion">
+
+          <option value="">
+            Selecciona una sesión
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        id="estadoSesion"
+        class="estado-sesion"
+        style="display:none"
+      ></div>
 
 
       <div class="acciones">
 
-        <button class="btn-secundario" onclick="marcarTodos(true)">
-
-          Marcar todos
-
+        <button
+          class="btn btn-verde"
+          onclick="marcarTodos('PRESENTE')"
+        >
+          ✓ Todos presentes
         </button>
 
-        <button class="btn-secundario" onclick="marcarTodos(false)">
-
-          Desmarcar todos
-
+        <button
+          class="btn btn-rojo"
+          onclick="marcarTodos('AUSENTE')"
+        >
+          ✕ Todos ausentes
         </button>
-
-      </div>
-
-
-      <div class="resumen">
-
-        <span id="contador">Presentes: 0 / 0</span>
-
-        <span id="estadoSesion"></span>
 
       </div>
 
     </section>
+
+
+    <!-- ESTADÍSTICAS -->
+
+
+    <div class="estadisticas">
+
+      <div class="estadistica">
+
+        <small>
+          Participantes
+        </small>
+
+        <strong
+          id="total"
+          class="valor-azul"
+        >
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="estadistica">
+
+        <small>
+          Presentes
+        </small>
+
+        <strong
+          id="presentes"
+          class="valor-verde"
+        >
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="estadistica">
+
+        <small>
+          Retardos
+        </small>
+
+        <strong
+          id="retardos"
+          class="valor-amarillo"
+        >
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="estadistica">
+
+        <small>
+          Ausentes
+        </small>
+
+        <strong
+          id="ausentes"
+          class="valor-rojo"
+        >
+          0
+        </strong>
+
+      </div>
+
+    </div>
 
 
     <section class="panel">
 
-      <div id="cargando" class="cargando">Cargando...</div>
+      <div>
 
-      <div id="lista"></div>
+        <strong>
+          Porcentaje de asistencia
+        </strong>
 
+        <span
+          id="porcentaje"
+          style="float:right"
+        >
+          0%
+        </span>
 
-      <button id="guardar" class="btn-principal" onclick="guardar()" disabled>
+        <div class="barra">
 
-        Guardar asistencia
+          <div
+            id="barraProgreso"
+            class="barra-progreso"
+          ></div>
 
-      </button>
+        </div>
 
-
-      <div id="mensaje" class="mensaje"></div>
+      </div>
 
     </section>
+
+
+    <!-- BUSCADOR -->
+
+
+    <section class="panel">
+
+      <div class="buscador">
+
+        <span class="buscador-icono">
+          🔎
+        </span>
+
+        <input
+          type="search"
+          id="buscar"
+          placeholder="Buscar por nombre, ID o correo..."
+        >
+
+      </div>
+
+    </section>
+
+
+    <!-- PARTICIPANTES -->
+
+
+    <section class="panel">
+
+      <h2 class="titulo-seccion">
+        Participantes
+      </h2>
+
+      <div
+        id="lista"
+        class="lista-participantes"
+      ></div>
+
+
+      <div class="zona-guardar">
+
+        <button
+          id="guardar"
+          class="btn btn-principal guardar"
+          onclick="solicitarGuardado()"
+          disabled
+        >
+          💾 Guardar asistencia
+        </button>
+
+      </div>
+
+    </section>
+
 
   </main>
 
 
-  <script>
-
-    let participantes = [];
-
-    let sesiones = [];
+  <!-- ==============================
+       LOADING
+       ============================== -->
 
 
-    document.addEventListener('DOMContentLoaded', cargarSesiones);
+  <div
+    id="cargando"
+    class="cargando-overlay"
+  >
 
-    document.getElementById('sesion').addEventListener('change', cargarParticipantes);
+    <div class="cargando-box">
+
+      <div class="spinner"></div>
+
+      <strong>
+        Procesando...
+      </strong>
+
+    </div>
+
+  </div>
 
 
-    function cargarSesiones() {
-
-      mostrarCarga(true);
-
-
-      google.script.run
-
-        .withSuccessHandler(datos => {
-
-          sesiones = datos || [];
-
-          const select = document.getElementById('sesion');
+  <!-- ==============================
+       TOAST
+       ============================== -->
 
 
-          sesiones.forEach(s => {
+  <div
+    id="toastContainer"
+    class="toast-container"
+  ></div>
 
-            const option = document.createElement('option');
 
-            option.value = s.id;
+  <!-- ==============================
+       MODAL
+       ============================== -->
 
-            option.textContent =
 
-              `Sesión ${s.numero} - ${s.fecha || 'sin fecha'} - ${s.tema}`;
+  <div
+    id="modalConfirmacion"
+    class="modal"
+  >
 
-            select.appendChild(option);
+    <div class="modal-contenido">
 
-          });
+      <h2>
+        Confirmar asistencia
+      </h2>
+
+      <p>
+        Revisa el resumen antes de guardar.
+      </p>
+
+      <div
+        id="modalResumen"
+        class="modal-resumen"
+      ></div>
+
+      <div class="modal-acciones">
+
+        <button
+          class="btn btn-rojo"
+          onclick="cerrarModal()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          class="btn btn-principal"
+          onclick="guardar()"
+        >
+          Confirmar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ==============================
+       FOOTER
+       ============================== -->
+
+
+  <footer>
+
+    Desarrollado por
+    Derek Alejandro Vargas Meneses
+    · ITIC · 22200792
+    · TecNM Pachuca
+
+  </footer>
+
+
+<script>
+
+
+  // ========================================
+  // VARIABLES
+  // ========================================
+
+
+  let participantes = [];
+
+  let sesiones = [];
+
+
+  // ========================================
+  // INICIO
+  // ========================================
+
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    () => {
+
+      document
+        .getElementById('sesion')
+        .addEventListener(
+          'change',
+          cargarParticipantes
+        );
+
+
+      document
+        .getElementById('buscar')
+        .addEventListener(
+          'input',
+          renderParticipantes
+        );
+
+
+      cargarSesiones();
+
+    }
+  );
+
+
+  // ========================================
+  // SESIONES
+  // ========================================
+
+
+  function cargarSesiones() {
+
+    mostrarCarga(true);
+
+
+    google.script.run
+
+      .withSuccessHandler(
+        datos => {
+
+          sesiones =
+            datos || [];
+
+
+          const select =
+            document
+              .getElementById(
+                'sesion'
+              );
+
+
+          sesiones.forEach(
+            sesion => {
+
+              const option =
+                document
+                  .createElement(
+                    'option'
+                  );
+
+
+              option.value =
+                sesion.id;
+
+
+              option.textContent =
+                `Sesión ${sesion.numero} · ` +
+                `${sesion.fecha} · ` +
+                `${sesion.tema}`;
+
+
+              select.appendChild(
+                option
+              );
+
+            }
+          );
 
 
           mostrarCarga(false);
 
-        })
 
-        .withFailureHandler(mostrarError)
+          mostrarToast(
+            'Aplicación lista',
+            `${sesiones.length} sesiones disponibles.`,
+            'exito'
+          );
 
-        .obtenerSesiones();
+        }
+      )
+
+      .withFailureHandler(
+        mostrarError
+      )
+
+      .obtenerSesiones();
+
+  }
+
+
+  // ========================================
+  // PARTICIPANTES
+  // ========================================
+
+
+  function cargarParticipantes() {
+
+    const idSesion =
+      document
+        .getElementById(
+          'sesion'
+        )
+        .value;
+
+
+    participantes = [];
+
+
+    renderParticipantes();
+
+    actualizarEstadisticas();
+
+
+    document
+      .getElementById(
+        'guardar'
+      )
+      .disabled = true;
+
+
+    if (!idSesion) {
+
+      actualizarEstadoSesion(
+        null
+      );
+
+      return;
 
     }
 
 
-    function cargarParticipantes() {
-
-      const idSesion = document.getElementById('sesion').value;
-
-      document.getElementById('lista').innerHTML = '';
-
-      document.getElementById('guardar').disabled = true;
+    const sesion =
+      sesiones.find(
+        s =>
+          s.id === idSesion
+      );
 
 
-      if (!idSesion) {
-
-        participantes = [];
-
-        actualizarContador();
-
-        document.getElementById('estadoSesion').textContent = '';
-
-        return;
-
-      }
+    actualizarEstadoSesion(
+      sesion
+    );
 
 
-      const sesion = sesiones.find(s => s.id === idSesion);
-
-      document.getElementById('estadoSesion').textContent =
-
-        sesion ? sesion.estado : '';
+    mostrarCarga(true);
 
 
-      mostrarCarga(true);
+    google.script.run
+
+      .withSuccessHandler(
+        datos => {
+
+          participantes =
+            datos || [];
 
 
-      google.script.run
+          mostrarCarga(false);
 
-        .withSuccessHandler(datos => {
-
-          participantes = datos || [];
 
           renderParticipantes();
 
-          mostrarCarga(false);
 
-          document.getElementById('guardar').disabled = false;
-
-        })
-
-        .withFailureHandler(mostrarError)
-
-        .obtenerParticipantes(idSesion);
-
-    }
+          actualizarEstadisticas();
 
 
-    function renderParticipantes() {
-
-      const lista = document.getElementById('lista');
-
-      lista.innerHTML = '';
-
-
-      participantes.forEach((p, indice) => {
-
-        const fila = document.createElement('div');
-
-        fila.className = 'participante';
+          document
+            .getElementById(
+              'guardar'
+            )
+            .disabled =
+              participantes.length === 0;
 
 
-        const datos = document.createElement('div');
+          mostrarToast(
+            'Sesión cargada',
+            `${participantes.length} participantes encontrados.`,
+            'exito'
+          );
 
-        datos.innerHTML = `
+        }
+      )
 
-          <div class="nombre">${p.id} · ${escapar(p.nombre)}</div>
+      .withFailureHandler(
+        mostrarError
+      )
 
-          <div class="correo">${escapar(p.correo)}</div>
+      .obtenerParticipantes(
+        idSesion
+      );
+
+  }
+
+
+  // ========================================
+  // RENDER
+  // ========================================
+
+
+  function renderParticipantes() {
+
+    const lista =
+      document
+        .getElementById(
+          'lista'
+        );
+
+
+    const busqueda =
+      document
+        .getElementById(
+          'buscar'
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    lista.innerHTML = '';
+
+
+    const filtrados =
+      participantes.filter(
+        participante => {
+
+          if (!busqueda) {
+            return true;
+          }
+
+
+          const texto =
+            `${participante.id} ` +
+            `${participante.nombre} ` +
+            `${participante.correo}`
+              .toLowerCase();
+
+
+          return texto.includes(
+            busqueda
+          );
+
+        }
+      );
+
+
+    filtrados.forEach(
+      participante => {
+
+        const tarjeta =
+          document
+            .createElement(
+              'article'
+            );
+
+
+        tarjeta.className =
+          `participante ` +
+          participante.estado
+            .toLowerCase();
+
+
+        tarjeta.innerHTML = `
+
+          <div class="participante-header">
+
+            <div class="avatar">
+              ${escapar(
+                participante.id
+                  .replace(
+                    'P',
+                    ''
+                  )
+              )}
+            </div>
+
+            <div class="datos-participante">
+
+              <div class="nombre">
+                ${escapar(
+                  participante.nombre
+                )}
+              </div>
+
+              <div class="correo">
+                ${escapar(
+                  participante.correo
+                )}
+              </div>
+
+              <div class="id-participante">
+                ${escapar(
+                  participante.id
+                )}
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="participante-body">
+
+
+            <div class="campos-participante">
+
+
+              <div>
+
+                <label>
+                  Estado
+                </label>
+
+                <select
+                  data-tipo="estado"
+                  data-id="${escapar(
+                    participante.id
+                  )}"
+                >
+
+                  <option
+                    value="PRESENTE"
+                    ${
+                      participante.estado ===
+                      'PRESENTE'
+                        ? 'selected'
+                        : ''
+                    }
+                  >
+                    ✓ Presente
+                  </option>
+
+                  <option
+                    value="RETARDO"
+                    ${
+                      participante.estado ===
+                      'RETARDO'
+                        ? 'selected'
+                        : ''
+                    }
+                  >
+                    ⏱ Retardo
+                  </option>
+
+                  <option
+                    value="AUSENTE"
+                    ${
+                      participante.estado ===
+                      'AUSENTE'
+                        ? 'selected'
+                        : ''
+                    }
+                  >
+                    ✕ Ausente
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div
+                class="
+                  campo-retardo
+                  ${
+                    participante.estado ===
+                    'RETARDO'
+                      ? 'visible'
+                      : ''
+                  }
+                "
+              >
+
+                <label>
+                  Minutos de retardo
+                </label>
+
+                <input
+                  type="number"
+                  min="0"
+                  max="999"
+                  data-tipo="retardo"
+                  data-id="${escapar(
+                    participante.id
+                  )}"
+                  value="${
+                    Number(
+                      participante
+                        .minutosRetardo
+                    ) || 0
+                  }"
+                >
+
+              </div>
+
+
+              <div>
+
+                <div class="fila-justificado">
+
+                  <input
+                    type="checkbox"
+                    data-tipo="justificado"
+                    data-id="${escapar(
+                      participante.id
+                    )}"
+                    ${
+                      participante.justificado
+                        ? 'checked'
+                        : ''
+                    }
+                  >
+
+                  <label>
+                    Presentó justificante
+                  </label>
+
+                </div>
+
+              </div>
+
+
+              <div class="campo-observacion">
+
+                <label>
+                  Observaciones
+                </label>
+
+                <textarea
+                  data-tipo="observacion"
+                  data-id="${escapar(
+                    participante.id
+                  )}"
+                  placeholder="Observación opcional..."
+                >${escapar(
+                  participante.observacion
+                )}</textarea>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
 
         `;
 
 
-        const check = document.createElement('input');
-
-        check.type = 'checkbox';
-
-        check.className = 'switch';
-
-        check.checked = Boolean(p.presente);
-
-        check.addEventListener('change', () => {
-
-          participantes[indice].presente = check.checked;
-
-          actualizarContador();
-
-        });
-
-
-        fila.appendChild(datos);
-
-        fila.appendChild(check);
-
-        lista.appendChild(fila);
-
-      });
-
-
-      actualizarContador();
-
-    }
-
-
-    function marcarTodos(valor) {
-
-      participantes = participantes.map(p => ({
-
-        ...p,
-
-        presente: valor
-
-      }));
-
-      renderParticipantes();
-
-    }
-
-
-    function actualizarContador() {
-
-      const presentes = participantes.filter(p => p.presente).length;
-
-      document.getElementById('contador').textContent =
-
-        `Presentes: ${presentes} / ${participantes.length}`;
-
-    }
-
-
-    function guardar() {
-
-      const idSesion = document.getElementById('sesion').value;
-
-
-      if (!idSesion) {
-
-        mostrarMensaje('Selecciona una sesión.', false);
-
-        return;
+        lista.appendChild(
+          tarjeta
+        );
 
       }
+    );
 
 
-      document.getElementById('guardar').disabled = true;
+    asignarEventosParticipantes();
 
-      mostrarCarga(true);
+  }
 
 
-      google.script.run
+  // ========================================
+  // EVENTOS PARTICIPANTES
+  // ========================================
 
-        .withSuccessHandler(resultado => {
+
+  function asignarEventosParticipantes() {
+
+
+    document
+      .querySelectorAll(
+        '[data-tipo="estado"]'
+      )
+      .forEach(
+        elemento => {
+
+          elemento
+            .addEventListener(
+              'change',
+              evento => {
+
+                const id =
+                  evento.target.dataset.id;
+
+
+                const participante =
+                  participantes.find(
+                    p =>
+                      p.id === id
+                  );
+
+
+                if (!participante) {
+                  return;
+                }
+
+
+                participante.estado =
+                  evento.target.value;
+
+
+                if (
+                  participante.estado !==
+                  'RETARDO'
+                ) {
+
+                  participante
+                    .minutosRetardo = 0;
+
+                }
+
+
+                renderParticipantes();
+
+                actualizarEstadisticas();
+
+              }
+            );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        '[data-tipo="retardo"]'
+      )
+      .forEach(
+        elemento => {
+
+          elemento
+            .addEventListener(
+              'input',
+              evento => {
+
+                const participante =
+                  participantes.find(
+                    p =>
+                      p.id ===
+                      evento.target.dataset.id
+                  );
+
+
+                if (participante) {
+
+                  participante
+                    .minutosRetardo =
+                      Math.max(
+                        0,
+                        Number(
+                          evento.target.value
+                        ) || 0
+                      );
+
+                }
+
+              }
+            );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        '[data-tipo="justificado"]'
+      )
+      .forEach(
+        elemento => {
+
+          elemento
+            .addEventListener(
+              'change',
+              evento => {
+
+                const participante =
+                  participantes.find(
+                    p =>
+                      p.id ===
+                      evento.target.dataset.id
+                  );
+
+
+                if (participante) {
+
+                  participante.justificado =
+                    evento.target.checked;
+
+                }
+
+              }
+            );
+
+        }
+      );
+
+
+    document
+      .querySelectorAll(
+        '[data-tipo="observacion"]'
+      )
+      .forEach(
+        elemento => {
+
+          elemento
+            .addEventListener(
+              'input',
+              evento => {
+
+                const participante =
+                  participantes.find(
+                    p =>
+                      p.id ===
+                      evento.target.dataset.id
+                  );
+
+
+                if (participante) {
+
+                  participante.observacion =
+                    evento.target.value;
+
+                }
+
+              }
+            );
+
+        }
+      );
+
+  }
+
+
+  // ========================================
+  // TODOS PRESENTES / AUSENTES
+  // ========================================
+
+
+  function marcarTodos(
+    estado
+  ) {
+
+    if (
+      participantes.length === 0
+    ) {
+
+      mostrarToast(
+        'Sin participantes',
+        'Selecciona primero una sesión.',
+        'aviso'
+      );
+
+      return;
+
+    }
+
+
+    participantes.forEach(
+      participante => {
+
+        participante.estado =
+          estado;
+
+
+        participante.minutosRetardo =
+          0;
+
+      }
+    );
+
+
+    renderParticipantes();
+
+    actualizarEstadisticas();
+
+
+    mostrarToast(
+      'Asistencia actualizada',
+      estado === 'PRESENTE'
+        ? 'Todos fueron marcados como presentes.'
+        : 'Todos fueron marcados como ausentes.',
+      'aviso'
+    );
+
+  }
+
+
+  // ========================================
+  // ESTADÍSTICAS
+  // ========================================
+
+
+  function actualizarEstadisticas() {
+
+    const total =
+      participantes.length;
+
+
+    const presentes =
+      participantes.filter(
+        p =>
+          p.estado ===
+          'PRESENTE'
+      ).length;
+
+
+    const retardos =
+      participantes.filter(
+        p =>
+          p.estado ===
+          'RETARDO'
+      ).length;
+
+
+    const ausentes =
+      participantes.filter(
+        p =>
+          p.estado ===
+          'AUSENTE'
+      ).length;
+
+
+    const asistieron =
+      presentes +
+      retardos;
+
+
+    const porcentaje =
+      total > 0
+        ? Math.round(
+            asistieron /
+            total *
+            100
+          )
+        : 0;
+
+
+    document
+      .getElementById(
+        'total'
+      )
+      .textContent =
+        total;
+
+
+    document
+      .getElementById(
+        'presentes'
+      )
+      .textContent =
+        presentes;
+
+
+    document
+      .getElementById(
+        'retardos'
+      )
+      .textContent =
+        retardos;
+
+
+    document
+      .getElementById(
+        'ausentes'
+      )
+      .textContent =
+        ausentes;
+
+
+    document
+      .getElementById(
+        'porcentaje'
+      )
+      .textContent =
+        `${porcentaje}%`;
+
+
+    document
+      .getElementById(
+        'barraProgreso'
+      )
+      .style.width =
+        `${porcentaje}%`;
+
+  }
+
+
+  // ========================================
+  // CONFIRMACIÓN
+  // ========================================
+
+
+  function solicitarGuardado() {
+
+    const idSesion =
+      document
+        .getElementById(
+          'sesion'
+        )
+        .value;
+
+
+    if (!idSesion) {
+
+      mostrarToast(
+        'Selecciona una sesión',
+        'No se puede guardar sin seleccionar una sesión.',
+        'error'
+      );
+
+      return;
+
+    }
+
+
+    const presentes =
+      participantes.filter(
+        p =>
+          p.estado ===
+          'PRESENTE'
+      ).length;
+
+
+    const retardos =
+      participantes.filter(
+        p =>
+          p.estado ===
+          'RETARDO'
+      ).length;
+
+
+    const ausentes =
+      participantes.filter(
+        p =>
+          p.estado ===
+          'AUSENTE'
+      ).length;
+
+
+    const justificados =
+      participantes.filter(
+        p =>
+          p.justificado
+      ).length;
+
+
+    document
+      .getElementById(
+        'modalResumen'
+      )
+      .innerHTML = `
+
+        <strong>
+          ${escapar(
+            idSesion
+          )}
+        </strong>
+
+        <br>
+
+        ✓ Presentes:
+        <strong>
+          ${presentes}
+        </strong>
+
+        <br>
+
+        ⏱ Retardos:
+        <strong>
+          ${retardos}
+        </strong>
+
+        <br>
+
+        ✕ Ausentes:
+        <strong>
+          ${ausentes}
+        </strong>
+
+        <br>
+
+        📄 Justificados:
+        <strong>
+          ${justificados}
+        </strong>
+
+      `;
+
+
+    document
+      .getElementById(
+        'modalConfirmacion'
+      )
+      .classList.add(
+        'visible'
+      );
+
+  }
+
+
+  function cerrarModal() {
+
+    document
+      .getElementById(
+        'modalConfirmacion'
+      )
+      .classList.remove(
+        'visible'
+      );
+
+  }
+
+
+  // ========================================
+  // GUARDAR
+  // ========================================
+
+
+  function guardar() {
+
+    cerrarModal();
+
+
+    const idSesion =
+      document
+        .getElementById(
+          'sesion'
+        )
+        .value;
+
+
+    if (!idSesion) {
+      return;
+    }
+
+
+    mostrarCarga(true);
+
+
+    document
+      .getElementById(
+        'guardar'
+      )
+      .disabled = true;
+
+
+    google.script.run
+
+      .withSuccessHandler(
+        resultado => {
 
           mostrarCarga(false);
 
-          document.getElementById('guardar').disabled = false;
+
+          document
+            .getElementById(
+              'guardar'
+            )
+            .disabled = false;
 
 
-          mostrarMensaje(
+          const sesion =
+            sesiones.find(
+              s =>
+                s.id ===
+                idSesion
+            );
 
-            `Guardado: ${resultado.presentes} presentes y ` +
-
-            `${resultado.ausentes} ausentes.`,
-
-            true
-
-          );
-
-
-          const sesion = sesiones.find(s => s.id === idSesion);
 
           if (sesion) {
 
-            sesion.estado = 'REGISTRADA';
+            sesion.estado =
+              'REGISTRADA';
 
-            document.getElementById('estadoSesion').textContent = 'REGISTRADA';
+            actualizarEstadoSesion(
+              sesion
+            );
 
           }
 
-        })
 
-        .withFailureHandler(error => {
+          mostrarToast(
+            'Asistencia guardada',
+            `${resultado.presentes} presentes, ` +
+            `${resultado.retardos} retardos y ` +
+            `${resultado.ausentes} ausentes.`,
+            'exito'
+          );
 
-          document.getElementById('guardar').disabled = false;
+        }
+      )
 
-          mostrarError(error);
+      .withFailureHandler(
+        error => {
 
-        })
+          document
+            .getElementById(
+              'guardar'
+            )
+            .disabled = false;
 
-        .guardarAsistencia(idSesion, participantes);
+
+          mostrarError(
+            error
+          );
+
+        }
+      )
+
+      .guardarAsistencia(
+        idSesion,
+        participantes
+      );
+
+  }
+
+
+  // ========================================
+  // ESTADO DE SESIÓN
+  // ========================================
+
+
+  function actualizarEstadoSesion(
+    sesion
+  ) {
+
+    const elemento =
+      document
+        .getElementById(
+          'estadoSesion'
+        );
+
+
+    if (!sesion) {
+
+      elemento.style.display =
+        'none';
+
+      return;
 
     }
 
 
-    function mostrarCarga(visible) {
+    elemento.style.display =
+      'inline-flex';
 
-      document.getElementById('cargando').style.display =
 
-        visible ? 'block' : 'none';
+    elemento.textContent =
+      sesion.estado ===
+      'REGISTRADA'
+        ? '✓ Sesión registrada'
+        : '⏳ Sesión pendiente';
+
+
+    elemento.className =
+      'estado-sesion';
+
+
+    if (
+      sesion.estado ===
+      'REGISTRADA'
+    ) {
+
+      elemento.classList.add(
+        'registrada'
+      );
 
     }
 
+  }
 
-    function mostrarError(error) {
 
-      mostrarCarga(false);
+  // ========================================
+  // CARGA
+  // ========================================
 
-      const texto = error && error.message
 
+  function mostrarCarga(
+    visible
+  ) {
+
+    document
+      .getElementById(
+        'cargando'
+      )
+      .classList.toggle(
+        'visible',
+        visible
+      );
+
+  }
+
+
+  // ========================================
+  // ERRORES
+  // ========================================
+
+
+  function mostrarError(
+    error
+  ) {
+
+    mostrarCarga(false);
+
+
+    const texto =
+      error &&
+      error.message
         ? error.message
-
         : String(error);
 
-      mostrarMensaje(texto, false);
+
+    mostrarToast(
+      'Ocurrió un error',
+      texto,
+      'error'
+    );
+
+  }
+
+
+  // ========================================
+  // TOAST
+  // ========================================
+
+
+  function mostrarToast(
+    titulo,
+    mensaje,
+    tipo = 'exito'
+  ) {
+
+    const container =
+      document
+        .getElementById(
+          'toastContainer'
+        );
+
+
+    const toast =
+      document
+        .createElement(
+          'div'
+        );
+
+
+    toast.className =
+      `toast ${tipo}`;
+
+
+    let icono = 'ℹ️';
+
+
+    if (
+      tipo === 'exito'
+    ) {
+
+      icono = '✅';
 
     }
 
 
-    function mostrarMensaje(texto, correcto) {
+    if (
+      tipo === 'error'
+    ) {
 
-      const mensaje = document.getElementById('mensaje');
-
-      mensaje.textContent = texto;
-
-      mensaje.className = `mensaje ${correcto ? 'ok' : 'error'}`;
+      icono = '❌';
 
     }
 
 
-    function escapar(texto) {
+    if (
+      tipo === 'aviso'
+    ) {
 
-      return String(texto ?? '')
-
-        .replaceAll('&', '&amp;')
-
-        .replaceAll('<', '&lt;')
-
-        .replaceAll('>', '&gt;')
-
-        .replaceAll('"', '&quot;')
-
-        .replaceAll("'", '&#039;');
+      icono = '⚠️';
 
     }
 
-  </script>
+
+    toast.innerHTML = `
+
+      <div class="toast-icono">
+        ${icono}
+      </div>
+
+      <div class="toast-texto">
+
+        <div class="toast-titulo">
+          ${escapar(
+            titulo
+          )}
+        </div>
+
+        <div class="toast-mensaje">
+          ${escapar(
+            mensaje
+          )}
+        </div>
+
+      </div>
+
+    `;
+
+
+    container.appendChild(
+      toast
+    );
+
+
+    setTimeout(
+      () => {
+
+        toast.remove();
+
+      },
+      4500
+    );
+
+  }
+
+
+  // ========================================
+  // SEGURIDAD HTML
+  // ========================================
+
+
+  function escapar(
+    texto
+  ) {
+
+    return String(
+      texto ?? ''
+    )
+
+      .replaceAll(
+        '&',
+        '&amp;'
+      )
+
+      .replaceAll(
+        '<',
+        '&lt;'
+      )
+
+      .replaceAll(
+        '>',
+        '&gt;'
+      )
+
+      .replaceAll(
+        '"',
+        '&quot;'
+      )
+
+      .replaceAll(
+        "'",
+        '&#039;'
+      );
+
+  }
+
+
+</script>
+
 
 </body>
 
 </html>
-

@@ -1,9 +1,16 @@
-const SPREADSHEET_ID = '1pwjPU06bmGqFlxl5TWcP2fuQNdB1YmoSFpAQhflmnOg';
+const SPREADSHEET_ID =
+  '1pwjPU06bmGqFlxl5TWcP2fuQNdB1YmoSFpAQhflmnOg';
 
 const HOJAS = Object.freeze({
   PARTICIPANTES: 'Participantes',
   SESIONES: 'Sesiones',
   ASISTENCIAS: 'Asistencias'
+});
+
+const ESTADOS_ASISTENCIA = Object.freeze({
+  PRESENTE: 'PRESENTE',
+  AUSENTE: 'AUSENTE',
+  RETARDO: 'RETARDO'
 });
 
 function obtenerLibro_() {
@@ -15,4 +22,3 @@ function obtenerLibro_() {
 
   return SpreadsheetApp.openById(SPREADSHEET_ID);
 }
-
